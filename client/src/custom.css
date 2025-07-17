@@ -1,0 +1,24 @@
+main {
+  min-height: calc(100vh - 13rem);
+}
+
+.card-thumbnail {
+  object-fit: cover;
+  object-position: top;
+}
+.inner-thumbnail {
+  object-fit: cover;
+  object-position: center;
+  max-height: 70vh;
+}
+.card-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.thumbnail {
+  height: 20rem;
+  object-fit: contain;
+  background-image: url();
+}
