@@ -26,7 +26,7 @@ export async function postLogin(req, res) {
     if (result.length === 0) {
       return res.json({
         status: "error",
-        msg: "Neteisinga email ir password kombincija, arba tokia paskyra neegzistuoja",
+        msg: "Neteisinga email ir password kombinacija, arba tokia paskyra neegzistuoja",
       });
     } else {
       userObj = result[0];

@@ -3,10 +3,10 @@ import { useNavigate } from "react-router";
 import { UserContext } from "../../context/user/UserContext";
 
 export function LoginForm() {
-  const [email, setEmail] = useState("chuck@norris.lt");
+  const [email, setEmail] = useState("admin@admin.lt");
   const [emailValidationText, setEmailValidationText] = useState("");
   const [emailValidationState, setEmailValidationState] = useState("");
-  const [password, setPassword] = useState("chuck@norris.lt");
+  const [password, setPassword] = useState("admin@admin.lt");
   const [passwordValidationText, setPasswordValidationText] = useState("");
   const [passwordValidationState, setPasswordValidationState] = useState("");
   const [alertText, setAlertText] = useState("");

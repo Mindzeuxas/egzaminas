@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { MenuLink } from "./MenuLink";
-import { mainMenuData } from "../../data/mainMenuData";
+import { publicMenuData, userMenuData } from "../../data/mainMenuData";
 
 import logo from "../../assets/logo.jpg";
 
@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { UserContext } from "../../context/user/UserContext";
 
 export function Header({ isPublicPage }) {
-  const { isLoggedIn, logout } = useContext(UserContext);
+  const { isLoggedIn, role, logout } = useContext(UserContext);
 
   function handleLogoutClick() {
     fetch("http://localhost:5445/api/admin/logout", {
@@ -33,12 +33,48 @@ export function Header({ isPublicPage }) {
           </Link>
         </div>
         <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          {mainMenuData.map((link) => (
+          {publicMenuData.map((link) => (
             <MenuLink key={link.text} to={link.href}>
               {link.text}
             </MenuLink>
           ))}
         </ul>
+        {isLoggedIn && role === "user" && (
+          <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            {userMenuData.map((link) => (
+              <MenuLink key={link.text} to={link.href}>
+                {link.text}
+              </MenuLink>
+            ))}
+          </ul>
+        )}
+
+        <form /*onSubmit={handleSearch}*/ className="search-form">
+          <select /*value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}*/>
+            {/* {CATEGORIES.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))} */}
+          </select>
+          <input
+            type="text"
+            placeholder="Search ads..."
+            // value={searchQuery}
+            // onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button type="submit">Search</button>
+        </form>
+
+        {/* {isLoggedIn && role === "user" && (
+          <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            {userMenuData.map((link) => (
+              <MenuLink key={link.text} to={link.href}>
+                {link.text}
+              </MenuLink>
+            ))}
+          </ul>
+        )} */}
 
         {isLoggedIn ? (
           <div className="col-md-3 text-end">

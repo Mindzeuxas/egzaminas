@@ -13,7 +13,7 @@ export async function getUserData(req, res, next) {
   try {
     const sql = `
             SELECT
-                users.id, users.email
+                users.id, users.email, users.role, users.isBanned
             FROM users
             INNER JOIN tokens
                 ON users.id = tokens.user_id
@@ -23,7 +23,7 @@ export async function getUserData(req, res, next) {
     if (result.length === 1) {
       req.user = {
         isLoggedIn: true,
-        role: "admin",
+        role: "user",
         ...result[0],
       };
     }

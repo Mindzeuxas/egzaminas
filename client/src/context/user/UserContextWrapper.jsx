@@ -24,7 +24,7 @@ export function UserContextWrapper(props) {
 
   function login(data) {
     setIsLoggedIn(() => true);
-    setRole(() => "admin");
+    setRole(() => data.role);
     setEmail(() => data.email);
     setUserId(() => data.id);
   }

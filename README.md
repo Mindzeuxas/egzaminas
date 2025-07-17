@@ -13,8 +13,8 @@ _website design project_
 
 This project is for exam porpuses only. Pull request are welcome, but priority for project authors! Thank you for your cooperation!
 To log in, you can use the following credentials:
-Username: chuck@norris.lt
-Password: chuck@norris.lt
+Username: admin@admin.lt
+Password: admin@admin.lt
 
 ## 🎯 Project features/goals
 
