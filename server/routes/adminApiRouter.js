@@ -11,10 +11,13 @@ import { categoriesPut } from "../api/admin/categoriesPut.js";
 
 import { apiUpload } from "../api/admin/apiUpload.js";
 import { uploadThumbnailImage } from "../middleware/uploadThumbnail.js";
+import { commentDelete } from "../api/admin/commentsDelete.js";
 
 export const adminApiRouter = express.Router();
 
 adminApiRouter.get("/logout", getLogout);
+
+adminApiRouter.delete("/comments/:id", commentDelete);
 
 adminApiRouter.post("/movies", moviesPost);
 adminApiRouter.put("/movies/:id", moviesPut);

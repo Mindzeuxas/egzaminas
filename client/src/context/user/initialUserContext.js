@@ -3,6 +3,7 @@ export const initialUserContext = {
   role: "public",
   email: "",
   userId: 0,
+  userIsBanned: 0,
   login: () => {},
   logout: () => {},
 };

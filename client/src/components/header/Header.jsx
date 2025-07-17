@@ -39,6 +39,7 @@ export function Header({ isPublicPage }) {
             </MenuLink>
           ))}
         </ul>
+
         {isLoggedIn && role === "user" && (
           <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             {userMenuData.map((link) => (
@@ -46,9 +47,13 @@ export function Header({ isPublicPage }) {
                 {link.text}
               </MenuLink>
             ))}
+            <li className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+              <Link to="/userdashboard" className="btn btn-primary me-2">
+                User Dashboard
+              </Link>
+            </li>
           </ul>
         )}
-
         <form /*onSubmit={handleSearch}*/ className="search-form">
           <select /*value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}*/>
             {/* {CATEGORIES.map((cat) => (
@@ -66,21 +71,15 @@ export function Header({ isPublicPage }) {
           <button type="submit">Search</button>
         </form>
 
-        {/* {isLoggedIn && role === "user" && (
+        {isLoggedIn && role === "admin" && (
           <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            {userMenuData.map((link) => (
-              <MenuLink key={link.text} to={link.href}>
-                {link.text}
-              </MenuLink>
-            ))}
+            <Link to="/admin" className="btn btn-primary me-2">
+              Admin Dashboard
+            </Link>
           </ul>
-        )} */}
-
+        )}
         {isLoggedIn ? (
           <div className="col-md-3 text-end">
-            <Link to="/admin" className="btn btn-primary me-2">
-              Dashboard
-            </Link>
             <button onClick={handleLogoutClick} className="btn btn-secondary">
               Log out
             </button>

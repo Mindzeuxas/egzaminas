@@ -7,6 +7,7 @@ export function UserContextWrapper(props) {
   const [role, setRole] = useState(initialUserContext.role);
   const [email, setEmail] = useState(initialUserContext.email);
   const [userId, setUserId] = useState(initialUserContext.userId);
+  const [userIsBanned, setUserIsBanned] = useState(initialUserContext.userIsBanned);
 
   useEffect(() => {
     fetch("http://localhost:5445/api/public/login", {
@@ -20,13 +21,14 @@ export function UserContextWrapper(props) {
         }
       })
       .catch(console.error);
-  }, []);
+  }, [role, isLoggedIn]);
 
   function login(data) {
     setIsLoggedIn(() => true);
     setRole(() => data.role);
     setEmail(() => data.email);
     setUserId(() => data.id);
+    setUserIsBanned(() => data.isBanned);
   }
 
   function logout() {
@@ -34,6 +36,7 @@ export function UserContextWrapper(props) {
     setRole(() => initialUserContext.role);
     setEmail(() => initialUserContext.email);
     setUserId(() => initialUserContext.userId);
+    setUserIsBanned(() => initialUserContext.isBanned);
   }
 
   const value = {
@@ -41,6 +44,7 @@ export function UserContextWrapper(props) {
     role,
     email,
     userId,
+    userIsBanned,
     login,
     logout,
   };

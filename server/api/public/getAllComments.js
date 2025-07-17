@@ -1,11 +1,10 @@
 import { connection } from "../../db.js";
 
-export async function getAllCategories(req, res) {
+export async function getAllComments(req, res) {
   try {
     const sql = `
             SELECT *
-            FROM categories
-            ORDER BY name;`;
+            FROM comments ;`;
     const [result] = await connection.execute(sql);
     return res.json({
       status: "success",

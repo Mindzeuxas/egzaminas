@@ -1,12 +1,13 @@
 import { connection } from "../../db.js";
 
-export async function getAllMovies(req, res) {
+export async function getAllAds(req, res) {
   try {
     const sql = `
-            SELECT movies.*, categories.url_slug AS category_url_slug
-            FROM movies
+            SELECT ads.*, categories.name AS category_name
+            FROM ads
             INNER JOIN categories
-                ON movies.category_id = categories.id;`;
+                ON ads.category_id = categories.id
+            WHERE banned = 0;`;
     const [result] = await connection.execute(sql);
 
     return res.json({

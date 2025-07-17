@@ -3,7 +3,7 @@ import { PageTitle } from "../../../components/page-title/PageTitle";
 import { capitalize } from "../../../lib/capitalize";
 import { useContext } from "react";
 import { MovieList } from "../../../components/movies/MovieList";
-import { MoviesContext } from "../../../context/movies/MoviesContext";
+import { MoviesContext } from "../../../context/ads/AdsContext";
 
 export function PageCategoryInner() {
   const { movies } = useContext(MoviesContext);

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link, useParams } from "react-router";
 import defaultImg from "../../../assets/logo.jpg";
-import { MoviesContext } from "../../../context/movies/MoviesContext";
+import { MoviesContext } from "../../../context/ads/AdsContext";
 
 export function PageMovieInner() {
   const { movies } = useContext(MoviesContext);
