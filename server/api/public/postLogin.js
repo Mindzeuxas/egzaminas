@@ -72,7 +72,7 @@ export async function postLogin(req, res) {
     "loginToken=" + loginToken,
     "domain=localhost",
     "path=/",
-    "max-age=3600",
+    "max-age=9600",
     "Same-Site=Lax",
     "Secure",
     "HttpOnly",

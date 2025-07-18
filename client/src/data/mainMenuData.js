@@ -6,5 +6,5 @@ export const publicMenuData = [
 export const userMenuData = [
   { href: "/my-liked-ads/:id", text: "Liked ads" },
   { href: "/my-posted-ads", text: "My posted ads" },
-  { href: "/add-ad", text: "Add your ad" },
+  { href: "/add-ad", text: "Add new ad" },
 ];

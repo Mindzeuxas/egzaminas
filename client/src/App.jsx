@@ -22,12 +22,13 @@ import { PageEditCategory } from "./pages/admin/categories/PageEditCategory";
 
 import { PageAllMovies } from "./pages/admin/ads/PageAllMovies";
 import { PageNewMovie } from "./pages/admin/ads/PageNewMovie";
-import { PageEditAd } from "./pages/admin/ads/PageEditAdd";
+import { PageEditAd } from "./pages/admin/ads/PageEditAd";
 
 import { CategoriesContextWrapper } from "./context/categories/CategoriesContextWrapper";
 import { AdsContextWrapper } from "./context/ads/AdsContextWrapper";
 import { CommentsContextWrapper } from "./context/comments/CommentsContextWrapper";
 import { PageMyAds } from "./pages/public/ads/PageMyAds";
+import { PageNewAd } from "./pages/admin/ads/PageNewAd";
 
 export function App() {
   return (
@@ -40,8 +41,9 @@ export function App() {
                 <Route Component={PublicLayout}>
                   <Route index path="/" element={<PageHome />} />
                   <Route path="/ads" element={<PageAllAds />} />
-                  <Route path="/admin/ads/:adId/edit" element={<PageEditAd />} />
                   <Route path="/my-posted-ads" element={<PageMyAds />} />
+                  <Route path="/add-ad" element={<PageNewAd />} />
+                  <Route path="/admin/ads/:adId/edit" element={<PageEditAd />} />
 
                   {/* <Route path="/movies/:movie" element={<PageMovieInner />} /> */}
                   <Route path="/categories" element={<PageCategories />} />

@@ -14,6 +14,8 @@ import { commentDelete } from "../api/admin/commentsDelete.js";
 import { adDelete } from "../api/admin/adDelete.js";
 import { adPut } from "../api/admin/adPut.js";
 import { commentPost } from "../api/admin/commentPost.js";
+import { adPost } from "../api/admin/adPost.js";
+import { likesPost } from "../api/admin/likesPost.js";
 
 export const adminApiRouter = express.Router();
 
@@ -24,6 +26,9 @@ adminApiRouter.post("/comment", commentPost);
 
 adminApiRouter.delete("/ads/:id", adDelete);
 adminApiRouter.put("/ads/:id", adPut);
+adminApiRouter.post("/ads/", adPost);
+
+adminApiRouter.post("/likes/", likesPost);
 
 adminApiRouter.post("/movies", moviesPost);
 adminApiRouter.delete("/movies/:id", moviesDelete);

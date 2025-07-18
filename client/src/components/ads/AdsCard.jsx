@@ -7,14 +7,12 @@ import { AdsContext } from "../../context/ads/AdsContext";
 export function AdCard({ data }) {
   const { comments, adminDeleteComment, adminRefreshComment } = useContext(CommentsContext);
   const adComments = comments.filter((c) => c.ad_id === data.id);
-
   const { userId, userIsBanned, role, isLoggedIn } = useContext(UserContext);
   const { publicAds, adminDeleteAd, adIsBanned } = useContext(AdsContext);
   const navigate = useNavigate();
 
   const [commentTexts, setCommentTexts] = useState({});
-
-  const hasLiked = false;
+  const [liked, setLiked] = useState(data.liked === "1");
 
   const isAdOwner = data.user_id === userId;
 
@@ -122,6 +120,33 @@ export function AdCard({ data }) {
       .catch(console.error);
   };
 
+  const handleLike = async () => {
+    const action = liked ? -1 : 1;
+    const newLiked = !liked;
+
+    setLiked(newLiked);
+
+    if (!isLoggedIn) return;
+    try {
+      await fetch("http://localhost:5445/api/admin/likes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          ad_id: data.id,
+          user_id: userId,
+          is_liked: action,
+        }),
+      });
+    } catch (err) {
+      console.error("Nepavyko atnaujinti like:", err);
+      // Atstatyk į pradinę būseną, jei nepavyko
+      setLiked(!newLiked);
+    }
+  };
+
   return (
     <div
       key={data.id}
@@ -144,12 +169,11 @@ export function AdCard({ data }) {
       <p>
         <strong>Price:</strong> ${data.price}
       </p>
-
-      <button
-      // onClick={() => onLike(data.id)} style={{ cursor: "pointer" }}
-      >
-        {/* {hasLiked ? "★" : "☆"} {data.likedBy.length} */}
-      </button>
+      {isLoggedIn && !userIsBanned && !adIsBanned && (
+        <button onClick={() => handleLike()} style={{ cursor: "pointer" }}>
+          {liked ? "★" : "☆"}
+        </button>
+      )}
 
       {isAdOwner && !userIsBanned && (
         <>
@@ -197,7 +221,7 @@ export function AdCard({ data }) {
           <div className="comment-box" style={{ marginTop: 10 }}>
             <input
               type="text"
-              placeholder="Add a comment"
+              placeholder="Your comment"
               value={commentTexts[data.id] || ""}
               onChange={(e) => handleInputChange(e, data.id)}
               style={{ width: "70%", marginRight: 10 }}
