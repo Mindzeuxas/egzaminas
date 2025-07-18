@@ -43,7 +43,7 @@ export function LoginForm() {
 
           login(data.user);
 
-          navigate("/admin");
+          navigate("/ads");
         } else {
           if (typeof data.msg === "string") {
             setAlertText(data.msg);

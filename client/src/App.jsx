@@ -20,13 +20,14 @@ import { PageAllCategories } from "./pages/admin/categories/PageAllCategories";
 import { PageNewCategory } from "./pages/admin/categories/PageNewCategory";
 import { PageEditCategory } from "./pages/admin/categories/PageEditCategory";
 
-import { PageAllMovies } from "./pages/admin/movies/PageAllMovies";
-import { PageNewMovie } from "./pages/admin/movies/PageNewMovie";
-import { PageEditMovie } from "./pages/admin/movies/PageEditMovie";
+import { PageAllMovies } from "./pages/admin/ads/PageAllMovies";
+import { PageNewMovie } from "./pages/admin/ads/PageNewMovie";
+import { PageEditAd } from "./pages/admin/ads/PageEditAdd";
 
 import { CategoriesContextWrapper } from "./context/categories/CategoriesContextWrapper";
 import { AdsContextWrapper } from "./context/ads/AdsContextWrapper";
 import { CommentsContextWrapper } from "./context/comments/CommentsContextWrapper";
+import { PageMyAds } from "./pages/public/ads/PageMyAds";
 
 export function App() {
   return (
@@ -39,10 +40,12 @@ export function App() {
                 <Route Component={PublicLayout}>
                   <Route index path="/" element={<PageHome />} />
                   <Route path="/ads" element={<PageAllAds />} />
+                  <Route path="/admin/ads/:adId/edit" element={<PageEditAd />} />
+                  <Route path="/my-posted-ads" element={<PageMyAds />} />
+
                   {/* <Route path="/movies/:movie" element={<PageMovieInner />} /> */}
                   <Route path="/categories" element={<PageCategories />} />
                   {/* <Route path="/categories/:category" element={<PageCategoryInner />} /> */}
-
                   <Route path="/register" element={<PageRegister />} />
                   <Route path="/login" element={<PageLogin />} />
                 </Route>
@@ -55,7 +58,6 @@ export function App() {
 
                   <Route path="/admin/movies" element={<PageAllMovies />} />
                   <Route path="/admin/movies/new" element={<PageNewMovie />} />
-                  <Route path="/admin/movies/:movie/edit" element={<PageEditMovie />} />
                 </Route>
                 <Route Component={PublicLayout}>
                   <Route path="*" element={<PageNotFound />} />

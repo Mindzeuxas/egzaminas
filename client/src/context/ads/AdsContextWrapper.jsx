@@ -5,6 +5,7 @@ import { AdsContext } from "./AdsContext";
 
 export function AdsContextWrapper(props) {
   const [publicAds, setPublicAds] = useState(initialAdsContext.publicAds);
+  const [adIsBanned, setAdIsBanned] = useState(initialAdsContext.adIsBanned);
 
   const { isLoggedIn } = useContext(UserContext);
 
@@ -42,6 +43,7 @@ export function AdsContextWrapper(props) {
 
   const value = {
     publicAds,
+    adIsBanned,
     setPublicAds,
     adminDeleteAd,
     adminRefreshAds,

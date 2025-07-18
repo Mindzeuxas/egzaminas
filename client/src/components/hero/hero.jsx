@@ -23,8 +23,8 @@ export function Hero() {
             prebuilt components, and powerful JavaScript plugins.
           </p>
           <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-            <Link to="/movies" className="btn btn-primary btn-lg px-4 me-md-2">
-              View all
+            <Link to="/ads" className="btn btn-primary btn-lg px-4 me-md-2">
+              View all ads
             </Link>
           </div>
         </div>

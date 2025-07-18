@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-// import { mainMenuData } from "../../data/mainMenuData";
 
 export function Footer({ isPublicPage }) {
   return (
@@ -21,15 +20,6 @@ export function Footer({ isPublicPage }) {
             ></path>{" "}
           </svg>
         </Link>
-        {/* <ul className="nav col-md-4 justify-content-end">
-          {mainMenuData.map((link) => (
-            <li key={link.text} className="nav-item">
-              <Link to={link.href} className="nav-link px-2 text-body-secondary">
-                {link.text}
-              </Link>
-            </li>
-          ))}
-        </ul> */}
       </footer>
     </div>
   );

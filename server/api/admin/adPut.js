@@ -3,7 +3,7 @@ import { IsValid } from "../../lib/IsValid.js";
 import fs from "fs/promises";
 import path from "path";
 
-export async function moviesPut(req, res) {
+export async function adPut(req, res) {
   const [errParams, msgParams] = IsValid.requiredFields(req.params, [{ field: "id", validation: IsValid.idAsString }]);
   if (errParams) {
     return res.status(400).json({ status: "error", msg: msgParams });
@@ -11,17 +11,12 @@ export async function moviesPut(req, res) {
 
   const [err, msg] = IsValid.requiredFields(
     req.body,
-    [
-      { field: "name", validation: IsValid.nonEmptyString },
-      { field: "url", validation: IsValid.urlSlug },
-    ],
+    [{ field: "name", validation: IsValid.nonEmptyString }],
     [
       { field: "img", validation: IsValid.nonEmptyString },
       { field: "description", validation: IsValid.nonEmptyString },
-      { field: "minutes", validation: IsValid.positiveInteger },
-      { field: "hours", validation: IsValid.positiveInteger },
+      { field: "price", validation: IsValid.nonEmptyString },
       { field: "category", validation: IsValid.nonEmptyString },
-      { field: "status", validation: IsValid.includesInList, options: ["draft", "publish"] },
     ]
   );
 
@@ -29,12 +24,24 @@ export async function moviesPut(req, res) {
     return res.status(400).json({ status: "error", msg: msg });
   }
 
-  const { img, name, url, description, minutes, hours, category, status } = req.body;
-  const duration = (hours ?? 0) * 60 + (minutes ?? 0);
+  const { img, name, description, price, category } = req.body;
+
+  let categoryId = 0;
+  try {
+    const sql = "SELECT * FROM categories WHERE name = ?;";
+    const [result] = await connection.execute(sql, [category]);
+    if (result.length !== 1) {
+      return res.status(400).json({ status: "error", msg: "Tokia kategorija neegzistuoja." });
+    }
+    categoryId = result[0].id;
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ status: "error", msg: "Serverio klaida, pabandykite veliau (2)" });
+  }
 
   let oldThumbnail = null;
   try {
-    const [rows] = await connection.execute("SELECT thumbnail FROM movies WHERE id = ?", [+req.params.id]);
+    const [rows] = await connection.execute("SELECT thumbnail FROM ads WHERE id = ?", [+req.params.id]);
     if (rows.length > 0) {
       oldThumbnail = rows[0].thumbnail;
     }
@@ -43,8 +50,8 @@ export async function moviesPut(req, res) {
   }
 
   try {
-    const sqlColumns = ["title", "url_slug", "is_published", "duration"];
-    const sqValues = [name, url, status === "publish" ? 1 : 0, duration];
+    const sqlColumns = ["name"];
+    const sqValues = [name];
     if (img) {
       sqlColumns.push("thumbnail");
       sqValues.push(img);
@@ -53,12 +60,16 @@ export async function moviesPut(req, res) {
       sqlColumns.push("description");
       sqValues.push(description);
     }
+    if (price) {
+      sqlColumns.push("price");
+      sqValues.push(price);
+    }
     if (category) {
       sqlColumns.push("category_id");
       sqValues.push(categoryId);
     }
 
-    const sql = `UPDATE movies SET ${sqlColumns.map((s) => s + " = ?").join(", ")} WHERE id = ?;`;
+    const sql = `UPDATE ads SET ${sqlColumns.map((s) => s + " = ?").join(", ")} WHERE id = ?;`;
     const [result] = await connection.execute(sql, [...sqValues, +req.params.id]);
 
     if (result.affectedRows !== 1) {
