@@ -8,19 +8,21 @@ export function UserContextWrapper(props) {
   const [email, setEmail] = useState(initialUserContext.email);
   const [userId, setUserId] = useState(initialUserContext.userId);
   const [userIsBanned, setUserIsBanned] = useState(initialUserContext.userIsBanned);
+  const [users, setUsers] = useState(initialUserContext.users);
 
   useEffect(() => {
-    fetch("http://localhost:5445/api/public/login", {
-      method: "GET",
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === "success") {
-          login(data.user);
-        }
+    fetchUsers(),
+      fetch("http://localhost:5445/api/public/login", {
+        method: "GET",
+        credentials: "include",
       })
-      .catch(console.error);
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === "success") {
+            login(data.user);
+          }
+        })
+        .catch(console.error);
   }, [role, isLoggedIn]);
 
   function login(data) {
@@ -39,12 +41,31 @@ export function UserContextWrapper(props) {
     setUserIsBanned(() => initialUserContext.isBanned);
   }
 
+  function fetchUsers() {
+    fetch("http://localhost:5445/api/public/users", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          setUsersList(data.list);
+        }
+      })
+      .catch(console.error);
+  }
+
+  function setUsersList(data) {
+    setUsers(() => data);
+  }
+
   const value = {
     isLoggedIn,
     role,
     email,
     userId,
     userIsBanned,
+    users,
     login,
     logout,
   };

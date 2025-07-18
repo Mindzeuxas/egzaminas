@@ -4,6 +4,7 @@ export const initialUserContext = {
   email: "",
   userId: 0,
   userIsBanned: 0,
+  users: [],
   login: () => {},
   logout: () => {},
 };

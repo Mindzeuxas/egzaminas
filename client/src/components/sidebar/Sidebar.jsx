@@ -44,21 +44,29 @@ export function Sidebar() {
               </Link>
             </li>
           </ul>
+
           <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
-            <span>Movies</span>
+            <span>Users</span>
           </h6>
           <ul className="nav nav-pills flex-column">
             <li className="nav-item">
-              <Link to="/admin/movies/new" className="nav-link d-flex align-items-center gap-2">
-                Add new
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/admin/movies" className="nav-link d-flex align-items-center gap-2">
-                All movies
+              <Link to="/admin/users" className="nav-link d-flex align-items-center gap-2">
+                All users
               </Link>
             </li>
           </ul>
+
+          <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+            <span>Ads</span>
+          </h6>
+          <ul className="nav nav-pills flex-column">
+            <li className="nav-item">
+              <Link to="/admin/ads" className="nav-link d-flex align-items-center gap-2">
+                All Ads
+              </Link>
+            </li>
+          </ul>
+
           <hr className="my-3" />
           <ul className="nav nav-pills flex-column">
             <li className="nav-item">

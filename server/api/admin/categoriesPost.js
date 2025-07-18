@@ -2,12 +2,7 @@ import { connection } from "../../db.js";
 import { IsValid } from "../../lib/IsValid.js";
 
 export async function categoriesPost(req, res) {
-  const [err, msg] = IsValid.requiredFields(req.body, [
-    { field: "name", validation: IsValid.nonEmptyString },
-    { field: "url", validation: IsValid.urlSlug },
-    { field: "description", validation: IsValid.nonEmptyString },
-    { field: "status", validation: IsValid.includesInList, options: ["draft", "publish"] },
-  ]);
+  const [err, msg] = IsValid.requiredFields(req.body, [{ field: "name", validation: IsValid.nonEmptyString }]);
 
   if (err) {
     return res.json({
@@ -16,11 +11,11 @@ export async function categoriesPost(req, res) {
     });
   }
 
-  const { name, url, description, status } = req.body;
+  const { name } = req.body;
 
   try {
-    const sql = "INSERT INTO categories (name, url_slug, description, is_published) VALUES (?, ?, ?, ?);";
-    const [result] = await connection.execute(sql, [name, url, description, status === "publish" ? 1 : 0]);
+    const sql = "INSERT INTO categories (name) VALUES (?);";
+    const [result] = await connection.execute(sql, [name]);
 
     if (result.affectedRows !== 1) {
       return res.json({

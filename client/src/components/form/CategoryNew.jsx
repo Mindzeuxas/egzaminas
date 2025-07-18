@@ -1,41 +1,36 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
-// import { CategoriesContext } from "../../context/categories/CategoriesContext";
+import { CategoriesContext } from "../../context/categories/CategoriesContext";
 
 export function CategoryNewForm() {
-  // const { adminRefreshCategory } = useContext(CategoriesContext);
+  const { adminRefreshCategory } = useContext(CategoriesContext);
   const [name, setName] = useState("");
-  const [url, setUrl] = useState("");
-  const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("draft");
+
   const navigate = useNavigate();
 
   function handleResetClick() {
     setName("");
-    setUrl("");
-    setDescription("");
-    setStatus("draft");
   }
 
   function handleFormSubmit(e) {
     e.preventDefault();
 
-    // fetch("http://localhost:5445/api/admin/categories", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   credentials: "include",
-    //   body: JSON.stringify({ name, url, description, status }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.status === "success") {
-    //       adminRefreshCategory();
-    //       navigate("/admin/categories");
-    //     }
-    //   })
-    //   .catch(console.error);
+    fetch("http://localhost:5445/api/admin/categories", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ name }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          adminRefreshCategory();
+          navigate("/admin/categories");
+        }
+      })
+      .catch(console.error);
   }
 
   return (
@@ -56,68 +51,8 @@ export function CategoryNewForm() {
           />
           <div className="invalid-feedback">Valid first name is required.</div>
         </div>
-        <div className="col-sm-12">
-          <label htmlFor="url" className="form-label">
-            URL slug
-          </label>
-          <input
-            onChange={(e) => setUrl(e.target.value)}
-            value={url}
-            type="text"
-            className="form-control"
-            id="url"
-            placeholder=""
-            required
-          />
-          <div className="invalid-feedback">Valid last name is required.</div>
-        </div>
-        <div className="col-sm-12">
-          <label htmlFor="description" className="form-label">
-            Description
-          </label>
-          <textarea
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-            className="form-control"
-            id="description"
-            placeholder=""
-            required
-          ></textarea>
-          <div className="invalid-feedback">Valid description is required.</div>
-        </div>
-        <div className="my-3">
-          <div className="form-check">
-            <input
-              onChange={() => setStatus("draft")}
-              checked={status === "draft" ? "checked" : ""}
-              id="draft"
-              value="draft"
-              name="status"
-              type="radio"
-              className="form-check-input"
-              required
-            />
-            <label className="form-check-label" htmlFor="draft">
-              Draft
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              onChange={() => setStatus("publish")}
-              checked={status === "publish" ? "checked" : ""}
-              id="publish"
-              value="publish"
-              name="status"
-              type="radio"
-              className="form-check-input"
-              required
-            />
-            <label className="form-check-label" htmlFor="publish">
-              Publish
-            </label>
-          </div>
-        </div>
       </div>
+
       <hr className="my-4" />
       <div className="d-flex" style={{ gap: "1rem" }}>
         <button className="btn btn-success btn-lg" type="submit">

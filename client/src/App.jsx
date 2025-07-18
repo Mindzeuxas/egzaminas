@@ -47,9 +47,7 @@ export function App() {
                   <Route path="/add-ad" element={<PageNewAd />} />
                   <Route path="/admin/ads/:adId/edit" element={<PageEditAd />} />
 
-                  {/* <Route path="/movies/:movie" element={<PageMovieInner />} /> */}
                   <Route path="/categories" element={<PageCategories />} />
-                  {/* <Route path="/categories/:category" element={<PageCategoryInner />} /> */}
                   <Route path="/register" element={<PageRegister />} />
                   <Route path="/login" element={<PageLogin />} />
                 </Route>
@@ -60,8 +58,12 @@ export function App() {
                   <Route path="/admin/categories/new" element={<PageNewCategory />} />
                   <Route path="/admin/categories/:category/edit" element={<PageEditCategory />} />
 
-                  <Route path="/admin/movies" element={<PageAllMovies />} />
-                  <Route path="/admin/movies/new" element={<PageNewMovie />} />
+                  <Route path="/admin/users" element={<PageAllCategories />} />
+
+                  {/* <Route path="/categories/:category" element={<PageCategoryInner />} /> */}
+                  {/* <Route path="/movies/:movie" element={<PageMovieInner />} /> */}
+                  {/* <Route path="/admin/movies" element={<PageAllMovies />} />
+                  <Route path="/admin/movies/new" element={<PageNewMovie />} /> */}
                 </Route>
                 <Route Component={PublicLayout}>
                   <Route path="*" element={<PageNotFound />} />

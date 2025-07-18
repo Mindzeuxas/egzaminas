@@ -11,12 +11,7 @@ export async function categoriesPut(req, res) {
     });
   }
 
-  const [err, msg] = IsValid.requiredFields(req.body, [
-    { field: "name", validation: IsValid.nonEmptyString },
-    { field: "url", validation: IsValid.urlSlug },
-    { field: "description", validation: IsValid.nonEmptyString },
-    { field: "status", validation: IsValid.includesInList, options: ["draft", "publish"] },
-  ]);
+  const [err, msg] = IsValid.requiredFields(req.body, [{ field: "name", validation: IsValid.nonEmptyString }]);
 
   if (err) {
     return res.json({
@@ -25,20 +20,14 @@ export async function categoriesPut(req, res) {
     });
   }
 
-  const { name, url, description, status } = req.body;
+  const { name } = req.body;
 
   try {
     const sql = `
             UPDATE categories
-            SET name = ?, url_slug = ?, description = ?, is_published = ?
+            SET name = ?
             WHERE id = ?;`;
-    const [result] = await connection.execute(sql, [
-      name,
-      url,
-      description,
-      status === "publish" ? 1 : 0,
-      +req.params.id,
-    ]);
+    const [result] = await connection.execute(sql, [name, +req.params.id]);
 
     if (result.affectedRows !== 1) {
       return res.json({
