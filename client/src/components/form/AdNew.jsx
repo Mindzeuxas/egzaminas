@@ -156,7 +156,7 @@ export function AdNewForm() {
               >
                 <option value="">Choose...</option>
                 {categories.map((c) => (
-                  <option key={c.url_slug} value={c.url_slug}>
+                  <option key={c.name} value={c.name}>
                     {c.name}
                   </option>
                 ))}

@@ -10,9 +10,7 @@ export function AdsContextWrapper(props) {
   const { isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      fetchPublicAds();
-    }
+    fetchPublicAds();
   }, [isLoggedIn]);
 
   function fetchPublicAds() {

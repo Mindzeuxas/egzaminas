@@ -8,7 +8,7 @@ export function AdCard({ data }) {
   const { comments, adminDeleteComment, adminRefreshComment } = useContext(CommentsContext);
   const adComments = comments.filter((c) => c.ad_id === data.id);
   const { userId, userIsBanned, role, isLoggedIn } = useContext(UserContext);
-  const { publicAds, adminDeleteAd, adIsBanned } = useContext(AdsContext);
+  const { publicAds, adminDeleteAd, adIsBanned, adminRefreshAds } = useContext(AdsContext);
   const navigate = useNavigate();
 
   const [commentTexts, setCommentTexts] = useState({});
@@ -139,7 +139,13 @@ export function AdCard({ data }) {
           user_id: userId,
           is_liked: action,
         }),
-      });
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === "success") {
+            adminRefreshAds();
+          }
+        });
     } catch (err) {
       console.error("Nepavyko atnaujinti like:", err);
       // Atstatyk į pradinę būseną, jei nepavyko

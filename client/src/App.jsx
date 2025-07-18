@@ -29,6 +29,7 @@ import { AdsContextWrapper } from "./context/ads/AdsContextWrapper";
 import { CommentsContextWrapper } from "./context/comments/CommentsContextWrapper";
 import { PageMyAds } from "./pages/public/ads/PageMyAds";
 import { PageNewAd } from "./pages/admin/ads/PageNewAd";
+import { PageLikedAds } from "./pages/public/ads/PageLikedAds";
 
 export function App() {
   return (
@@ -42,6 +43,7 @@ export function App() {
                   <Route index path="/" element={<PageHome />} />
                   <Route path="/ads" element={<PageAllAds />} />
                   <Route path="/my-posted-ads" element={<PageMyAds />} />
+                  <Route path="/my-liked-ads" element={<PageLikedAds />} />
                   <Route path="/add-ad" element={<PageNewAd />} />
                   <Route path="/admin/ads/:adId/edit" element={<PageEditAd />} />
 

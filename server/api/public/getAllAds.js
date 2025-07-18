@@ -1,6 +1,7 @@
 import { connection } from "../../db.js";
 
 export async function getAllAds(req, res) {
+  const userId = req.user.id ? req.user.id : 0;
   try {
     const sql = `
             SELECT ads.*, categories.name AS category_name,                 
@@ -12,7 +13,7 @@ export async function getAllAds(req, res) {
             INNER JOIN categories
                 ON ads.category_id = categories.id
             WHERE banned = 0;`;
-    const [result] = await connection.execute(sql, [req.user.id]);
+    const [result] = await connection.execute(sql, [userId]);
 
     return res.json({
       status: "success",

@@ -49,22 +49,6 @@ export function Header({ isPublicPage }) {
             ))}
           </ul>
         )}
-        <form /*onSubmit={handleSearch}*/ className="search-form">
-          <select /*value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}*/>
-            {/* {CATEGORIES.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat}
-              </option>
-            ))} */}
-          </select>
-          <input
-            type="text"
-            placeholder="Search ads..."
-            // value={searchQuery}
-            // onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <button type="submit">Search</button>
-        </form>
 
         {isLoggedIn && role === "admin" && (
           <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
