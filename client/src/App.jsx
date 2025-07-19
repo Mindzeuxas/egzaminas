@@ -1,5 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import { UserContextWrapper } from "./context/user/UserContextWrapper";
+import { CategoriesContextWrapper } from "./context/categories/CategoriesContextWrapper";
+import { AdsContextWrapper } from "./context/ads/AdsContextWrapper";
+import { CommentsContextWrapper } from "./context/comments/CommentsContextWrapper";
 
 import { PublicLayout } from "./layout/PublicLayout";
 import { PrivateLayout } from "./layout/PrivateLayout";
@@ -20,16 +23,14 @@ import { PageAllCategories } from "./pages/admin/categories/PageAllCategories";
 import { PageNewCategory } from "./pages/admin/categories/PageNewCategory";
 import { PageEditCategory } from "./pages/admin/categories/PageEditCategory";
 
-import { PageAllMovies } from "./pages/admin/ads/PageAllMovies";
-import { PageNewMovie } from "./pages/admin/ads/PageNewMovie";
-import { PageEditAd } from "./pages/admin/ads/PageEditAd";
-
-import { CategoriesContextWrapper } from "./context/categories/CategoriesContextWrapper";
-import { AdsContextWrapper } from "./context/ads/AdsContextWrapper";
-import { CommentsContextWrapper } from "./context/comments/CommentsContextWrapper";
 import { PageMyAds } from "./pages/public/ads/PageMyAds";
-import { PageNewAd } from "./pages/admin/ads/PageNewAd";
+import { PageEditAd } from "./pages/admin/users/PageEditAd";
+import { PageNewAd } from "./pages/admin/users/PageNewAd";
 import { PageLikedAds } from "./pages/public/ads/PageLikedAds";
+
+import { PageAllUsers } from "./pages/admin/users/PageAllUsers";
+import { PageAllAdminAds } from "./pages/admin/ads/PageAllAds";
+import { PageAdminAllComments } from "./pages/admin/comments/PageAllComments";
 
 export function App() {
   return (
@@ -58,12 +59,9 @@ export function App() {
                   <Route path="/admin/categories/new" element={<PageNewCategory />} />
                   <Route path="/admin/categories/:category/edit" element={<PageEditCategory />} />
 
-                  <Route path="/admin/users" element={<PageAllCategories />} />
-
-                  {/* <Route path="/categories/:category" element={<PageCategoryInner />} /> */}
-                  {/* <Route path="/movies/:movie" element={<PageMovieInner />} /> */}
-                  {/* <Route path="/admin/movies" element={<PageAllMovies />} />
-                  <Route path="/admin/movies/new" element={<PageNewMovie />} /> */}
+                  <Route path="/admin/users" element={<PageAllUsers />} />
+                  <Route path="/admin/ads" element={<PageAllAdminAds />} />
+                  <Route path="/admin/comments" element={<PageAdminAllComments />} />
                 </Route>
                 <Route Component={PublicLayout}>
                   <Route path="*" element={<PageNotFound />} />

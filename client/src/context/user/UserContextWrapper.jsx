@@ -42,7 +42,7 @@ export function UserContextWrapper(props) {
   }
 
   function fetchUsers() {
-    fetch("http://localhost:5445/api/public/users", {
+    fetch("http://localhost:5445/api/admin/users", {
       method: "GET",
       credentials: "include",
     })
@@ -56,7 +56,11 @@ export function UserContextWrapper(props) {
   }
 
   function setUsersList(data) {
-    setUsers(() => data);
+    setUsers(() => [...data]);
+  }
+
+  function refreshUsers() {
+    fetchUsers();
   }
 
   const value = {
@@ -68,6 +72,7 @@ export function UserContextWrapper(props) {
     users,
     login,
     logout,
+    refreshUsers,
   };
 
   return <UserContext.Provider value={value}>{props.children}</UserContext.Provider>;

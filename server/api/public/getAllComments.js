@@ -4,7 +4,8 @@ export async function getAllComments(req, res) {
   try {
     const sql = `
             SELECT *
-            FROM comments ;`;
+            FROM comments 
+            WHERE isBanned = 0;`;
     const [result] = await connection.execute(sql);
     return res.json({
       status: "success",

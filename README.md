@@ -44,7 +44,7 @@ Would like to run this project locally? Open terminal and follow these steps:
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/RokasIme/exam.git
+   git clone hhttps://github.com/RokasIme/skelbimaiTrain.git
    ```
 2. Install main NPM packages
    ```sh

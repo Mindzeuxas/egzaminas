@@ -5,12 +5,14 @@ import { CommentsContext } from "./CommentsContext";
 
 export function CommentsContextWrapper(props) {
   const [comments, setComments] = useState(initialCommentsContext.comments);
+  const [adminComments, setAdminComments] = useState(initialCommentsContext.adminComments);
 
   const { isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     if (!isLoggedIn) {
       fetchComments();
+      fetchAdminComments();
     }
   }, [isLoggedIn]);
 
@@ -28,12 +30,31 @@ export function CommentsContextWrapper(props) {
       .catch(console.error);
   }
 
+  function fetchAdminComments() {
+    fetch("http://localhost:5445/api/admin/comments", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          setAdminCommentsList(data.list);
+        }
+      })
+      .catch(console.error);
+  }
+
   function setCommentsList(data) {
     setComments(() => data);
   }
 
+  function setAdminCommentsList(data) {
+    setAdminComments(() => [...data]);
+  }
+
   function adminRefreshComment() {
     fetchComments();
+    fetchAdminComments();
   }
 
   function adminDeleteComment(id) {
@@ -42,6 +63,7 @@ export function CommentsContextWrapper(props) {
 
   const value = {
     comments,
+    adminComments,
     setCommentsList,
     adminRefreshComment,
     adminDeleteComment,

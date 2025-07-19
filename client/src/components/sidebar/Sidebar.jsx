@@ -67,6 +67,17 @@ export function Sidebar() {
             </li>
           </ul>
 
+          <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+            <span>Comments</span>
+          </h6>
+          <ul className="nav nav-pills flex-column">
+            <li className="nav-item">
+              <Link to="/admin/comments" className="nav-link d-flex align-items-center gap-2">
+                All comments
+              </Link>
+            </li>
+          </ul>
+
           <hr className="my-3" />
           <ul className="nav nav-pills flex-column">
             <li className="nav-item">

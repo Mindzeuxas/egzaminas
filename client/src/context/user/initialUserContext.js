@@ -7,4 +7,5 @@ export const initialUserContext = {
   users: [],
   login: () => {},
   logout: () => {},
+  refreshUsers: () => {},
 };

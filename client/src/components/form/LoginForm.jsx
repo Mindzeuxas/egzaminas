@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { UserContext } from "../../context/user/UserContext";
+import { AdsContext } from "../../context/ads/AdsContext";
 
 export function LoginForm() {
   const [email, setEmail] = useState("admin@admin.lt");
@@ -14,6 +15,7 @@ export function LoginForm() {
   const navigate = useNavigate();
 
   const { login } = useContext(UserContext);
+  const { adminRefreshAds } = useContext(AdsContext);
 
   function handleFormSubmit(e) {
     e.preventDefault();
@@ -43,6 +45,7 @@ export function LoginForm() {
 
           login(data.user);
 
+          adminRefreshAds();
           navigate("/ads");
         } else {
           if (typeof data.msg === "string") {

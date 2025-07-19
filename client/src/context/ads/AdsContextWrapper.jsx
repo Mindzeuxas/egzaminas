@@ -5,12 +5,14 @@ import { AdsContext } from "./AdsContext";
 
 export function AdsContextWrapper(props) {
   const [publicAds, setPublicAds] = useState(initialAdsContext.publicAds);
+  const [adminAds, setAdminAds] = useState(initialAdsContext.adminAds);
   const [adIsBanned, setAdIsBanned] = useState(initialAdsContext.adIsBanned);
 
   const { isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     fetchPublicAds();
+    fetchAdminAds();
   }, [isLoggedIn]);
 
   function fetchPublicAds() {
@@ -27,8 +29,26 @@ export function AdsContextWrapper(props) {
       .catch(console.error);
   }
 
+  function fetchAdminAds() {
+    fetch("http://localhost:5445/api/admin/ads", {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          setAdminAdsList(data.list);
+        }
+      })
+      .catch(console.error);
+  }
+
   function setPublicAdsList(data) {
     setPublicAds(() => data);
+  }
+
+  function setAdminAdsList(data) {
+    setAdminAds(() => [...data]);
   }
 
   function adminDeleteAd(id) {
@@ -37,10 +57,12 @@ export function AdsContextWrapper(props) {
 
   function adminRefreshAds() {
     fetchPublicAds();
+    fetchAdminAds();
   }
 
   const value = {
     publicAds,
+    adminAds,
     adIsBanned,
     setPublicAds,
     adminDeleteAd,
