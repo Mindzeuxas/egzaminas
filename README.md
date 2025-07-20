@@ -65,7 +65,7 @@ There is no tests for this project.
 
 ## 🎅 Authors
 
-Rokas: [Github](https://github.com/RokasIme)
+Mindaugas: [Github](https://github.com/Mindzeuxas)
 
 ## ⚠️ License
 
