@@ -22,7 +22,7 @@ export function CommentsTableRow({ comment }) {
 
   function putBan(banValue) {
     fetch("http://localhost:5445/api/admin/comments/", {
-      method: "put",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },

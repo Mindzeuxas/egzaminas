@@ -10,6 +10,7 @@ export function AdCard({ data }) {
   const { userId, userIsBanned, role, isLoggedIn } = useContext(UserContext);
   const { publicAds, adminDeleteAd, adIsBanned, adminRefreshAds } = useContext(AdsContext);
   const navigate = useNavigate();
+  
 
   const [commentTexts, setCommentTexts] = useState({});
   const [liked, setLiked] = useState(data.liked === "1");
@@ -29,6 +30,7 @@ export function AdCard({ data }) {
       })
       .catch(console.error);
   }
+
 
   function onDeleteAd(adId) {
     fetch("http://localhost:5445/api/admin/ads/" + adId, {
@@ -176,17 +178,30 @@ export function AdCard({ data }) {
         <strong>Price:</strong> ${data.price}
       </p>
       {isLoggedIn && !userIsBanned && !adIsBanned && (
-        <button onClick={() => handleLike()} style={{ cursor: "pointer" }}>
-          {liked ? "★" : "☆"}
+        <button onClick={() => handleLike()} style={{ 
+          color: "orange",
+          border: "none",
+          backgroundColor: "transparent",
+          fontSize: "1.1em",
+          cursor: "pointer"
+           }}>
+          {liked ? "★ liked" : "☆ like"}
         </button>
       )}
 
       {isAdOwner && !userIsBanned && (
         <>
-          <button onClick={() => setEditAd(data.id)} style={{ marginLeft: 10 }}>
+          <button onClick={() => setEditAd(data.id)} style={{ 
+            marginLeft: 10,
+            borderRadius: "2rem",
+            backgroundColor: "blue",
+            color: "white"}}>
             Edit
           </button>
-          <button onClick={() => onDeleteAd(data.id)} style={{ marginLeft: 10, color: "red" }}>
+          <button onClick={() => onDeleteAd(data.id)} style={{ marginLeft: 10, 
+          borderRadius: "2rem",
+            backgroundColor: "red",
+            color: "white"}}>
             Delete
           </button>
         </>
@@ -198,6 +213,7 @@ export function AdCard({ data }) {
           adComments.map((comment) => {
             const commentUserId = comment.user_id;
             const isCommentOwner = userId === commentUserId;
+            
 
             return (
               <div key={comment.id} style={{ marginBottom: 6 }}>
@@ -208,7 +224,9 @@ export function AdCard({ data }) {
                       onClick={() => onDeleteComment(comment.id)}
                       style={{
                         marginLeft: 10,
-                        color: "red",
+                        backgroundColor: "red",
+                        borderRadius: "2rem",
+                        color: "white",
                         cursor: "pointer",
                       }}
                     >

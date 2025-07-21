@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { MenuLink } from "./MenuLink";
 import { publicMenuData, userMenuData } from "../../data/mainMenuData";
 
-import logo from "../../assets/logo.jpg";
+import logo from "../../assets/logo.png";
 
 import { useContext } from "react";
 import { UserContext } from "../../context/user/UserContext";
