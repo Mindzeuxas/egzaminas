@@ -44,7 +44,7 @@ Would like to run this project locally? Open terminal and follow these steps:
 
 1. Clone the repo
    ```sh
-   git clone hhttps://github.com/RokasIme/skelbimaiTrain.git
+   git clone hhttps://github.com/Mindzeuxas/skelbimai.git
    ```
 2. Install main NPM packages
    ```sh
